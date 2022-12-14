@@ -1,0 +1,26 @@
+/* Colors naming: https://chir.ag/projects/name-that-color/#6195ED */
+:root {
+  --white: #fff;
+  --mine-shaft: #222;
+  --mine-shaft-hover: #383838;
+  --gallery: #eee;
+  --ronchi: #ebb757;
+  --ronchi-light: #f8edd9;
+  --ronchi-dark: #ebb75780;
+  --burnt-sienna: #eb6d57;
+  --cornflower-blue: #578beb;
+
+  /* semantic color variables */
+  --background: var(--white);
+  --button-primary: var(--ronchi);
+  --footer: var(--ronchi);
+  --header: var(--ronchi);
+  --text: var(--mine-shaft);
+  --theme-toggle: var(--mine-shaft);
+}
+
+:root.dark-theme {
+  --background: var(--mine-shaft);
+  --text-content: var(--gallery);
+  --theme-toggle: var(--white);
+}

@@ -25,8 +25,12 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
         console.error(error);
       });
   };
-  const getCurrencyDetails = (option: string): CurrencyObject | undefined => {
-    return currenciesDetails?.value.find((item) => item.CharCode === option);
+
+  const currencyDetails = ref<CurrencyObject>();
+  const getCurrencyDetails = (option: string): void => {
+    currencyDetails.value = currenciesDetails?.value.find(
+      (item) => item.CharCode === option,
+    );
   };
 
   const sortedCurrenciesList = ref<string[]>(currenciesList.value);
@@ -46,6 +50,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
 
   return {
     sortedCurrenciesList,
+    currencyDetails,
     getCurrencyDetails,
     filterCurrenciesList,
   };

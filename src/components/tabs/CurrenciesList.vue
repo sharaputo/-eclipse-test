@@ -41,10 +41,12 @@
       </button>
     </div>
 
-    <ul class="currency-list">
+    <AppLoader v-if="isLoading" />
+
+    <ul class="currency-list" v-else>
       <li
         class="currency-list__item"
-        v-for="(currency, i) in sortedCurrenciesList"
+        v-for="(currency, i) in filteredCurrenciesList"
         :key="`currency-${i}`">
         <input
           type="radio"
@@ -59,14 +61,24 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
+  import { ref } from 'vue';
   import { storeToRefs } from 'pinia';
   import TheGrid from '@/components/layout/TheGrid.vue';
+  import AppLoader from '@/components/common/AppLoader.vue';
   import InputField from '@/components/common/InputField.vue';
   import { useCurrencyStore } from '@/stores/CurrencyStore';
 
   const store = useCurrencyStore();
-  const { sortedCurrenciesList, currencyDetails } = storeToRefs(store);
+  const {
+    isLoading,
+    filteredCurrenciesList,
+    currencyDetails,
+    charcode,
+    rate,
+    reversedRate,
+    rateDifference,
+    rateDifferenceReversed,
+  } = storeToRefs(store);
 
   const searchCurrency = (e: { target: { value: string } }) => {
     store.filterCurrenciesList(e.target.value);
@@ -79,43 +91,6 @@
 
   const showDetails = (option: string): void => {
     store.getCurrencyDetails(option);
-  };
-
-  const charcode = computed(() => {
-    return currencyDetails.value?.CharCode;
-  });
-  const rate = computed(() => {
-    return currencyDetails.value?.Value;
-  });
-  const reversedRate = computed(() => {
-    if (currencyDetails.value?.Value) {
-      return roundValue(1 / currencyDetails.value.Value);
-    }
-  });
-  const rateDifference = computed(() => {
-    let difference: number = 0;
-
-    if (currencyDetails.value?.Value && currencyDetails.value?.Previous) {
-      difference = roundValue(
-        currencyDetails.value.Value - currencyDetails.value.Previous,
-      );
-    }
-
-    return difference;
-  });
-  const rateDifferenceReversed = computed(() => {
-    let difference: number = 0;
-
-    if (currencyDetails.value?.Value && currencyDetails.value?.Previous) {
-      difference = roundValue(
-        1 / currencyDetails.value.Value - 1 / currencyDetails.value.Previous,
-      );
-    }
-
-    return difference;
-  });
-  const roundValue = (value: number): number => {
-    return Math.floor(value * 10000) / 10000;
   };
 </script>
 

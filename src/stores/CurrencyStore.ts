@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import useFetch from '@/composables/useFetch';
+import useRound from '@/composables/useRound';
 import type CurrencyObject from '@/@types/CurrencyObject';
 
 export const useCurrencyStore = defineStore('currencyStore', () => {
+  const isLoading = ref(false);
   const currenciesList = ref<string[]>([]);
   const currenciesDetails = ref<CurrencyObject[]>([]);
 
   const getCurrencies = (): void => {
+    isLoading.value = true;
     const API = new useFetch('https://www.cbr-xml-daily.ru');
 
     API.get('/daily_json.js')
@@ -19,6 +22,8 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
             currenciesList.value.push(key);
             currenciesDetails.value.push(value);
           });
+
+          isLoading.value = false;
         }
       })
       .catch((error) => {
@@ -32,17 +37,53 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
       (item) => item.CharCode === option,
     );
   };
+  const charcode = computed(() => {
+    return currencyDetails.value?.CharCode;
+  });
+  const rate = computed(() => {
+    return currencyDetails.value?.Value;
+  });
+  const reversedRate = computed(() => {
+    if (currencyDetails.value?.Value) {
+      return useRound(1 / currencyDetails.value.Value);
+    }
+  });
+  const rateDifference = computed(() => {
+    let difference: number = 0;
 
-  const sortedCurrenciesList = ref<string[]>(currenciesList.value);
+    if (currencyDetails.value?.Value && currencyDetails.value?.Previous) {
+      difference = useRound(
+        currencyDetails.value.Value - currencyDetails.value.Previous,
+      );
+    }
+
+    return difference;
+  });
+  const rateDifferenceReversed = computed(() => {
+    let difference: number = 0;
+
+    if (currencyDetails.value?.Value && currencyDetails.value?.Previous) {
+      difference = useRound(
+        1 / currencyDetails.value.Value - 1 / currencyDetails.value.Previous,
+      );
+    }
+
+    return difference;
+  });
+
+  const filteredCurrenciesList = ref(currenciesList.value);
   const filterCurrenciesList = (input: string): void => {
     let searchResult: CurrencyObject[];
+
     searchResult = currenciesDetails.value.filter(
       (item) =>
         item.CharCode.includes(input.toUpperCase()) ||
         item.Name.toLowerCase().includes(input.toLowerCase()),
     );
 
-    sortedCurrenciesList.value = searchResult.map((item) => item.CharCode);
+    filteredCurrenciesList.value = searchResult
+      .map((item) => item.CharCode)
+      .sort();
   };
 
   onMounted(() => {
@@ -50,8 +91,14 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
   });
 
   return {
-    sortedCurrenciesList,
+    isLoading,
+    filteredCurrenciesList,
     currencyDetails,
+    charcode,
+    rate,
+    reversedRate,
+    rateDifference,
+    rateDifferenceReversed,
     getCurrencyDetails,
     filterCurrenciesList,
   };

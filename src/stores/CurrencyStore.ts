@@ -25,16 +25,25 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
         console.error(error);
       });
   };
-  const getCurrencyDetails = (option: string): CurrencyObject | undefined => {
-    return currenciesDetails?.value.find((item) => item.CharCode === option);
+
+  const currencyDetails = ref<CurrencyObject>();
+  const getCurrencyDetails = (option: string): void => {
+    currencyDetails.value = currenciesDetails?.value.find(
+      (item) => item.CharCode === option,
+    );
   };
 
   const sortedCurrenciesList = ref<string[]>(currenciesList.value);
   const filterCurrenciesList = (input: string): void => {
-    if (input) {
-      sortedCurrenciesList.value = currenciesList.value.filter((item) =>
-        item.includes(input.toUpperCase()),
+    if (input.length > 0) {
+      let searchResult: CurrencyObject[];
+      searchResult = currenciesDetails.value.filter(
+        (item) =>
+          item.CharCode.includes(input.toUpperCase()) ||
+          item.Name.toLowerCase().includes(input.toLowerCase()),
       );
+
+      sortedCurrenciesList.value = searchResult.map((item) => item.CharCode);
     } else {
       sortedCurrenciesList.value = currenciesList.value;
     }
@@ -46,6 +55,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
 
   return {
     sortedCurrenciesList,
+    currencyDetails,
     getCurrencyDetails,
     filterCurrenciesList,
   };

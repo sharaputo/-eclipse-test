@@ -64,10 +64,10 @@
   import TheGrid from '@/components/layout/TheGrid.vue';
   import InputField from '@/components/common/InputField.vue';
   import { useCurrencyStore } from '@/stores/CurrencyStore';
-  import type CurrencyObject from '@/@types/CurrencyObject';
 
   const store = useCurrencyStore();
-  const { sortedCurrenciesList } = storeToRefs(store);
+  const { sortedCurrenciesList, currencyDetails } = storeToRefs(store);
+
   const searchCurrency = (e: { target: { value: string } }) => {
     store.filterCurrenciesList(e.target.value);
   };
@@ -77,9 +77,8 @@
     reversed.value = !reversed.value;
   };
 
-  const currencyDetails = ref<CurrencyObject | undefined>();
   const showDetails = (option: string): void => {
-    currencyDetails.value = store.getCurrencyDetails(option);
+    store.getCurrencyDetails(option);
   };
 
   const charcode = computed(() => {

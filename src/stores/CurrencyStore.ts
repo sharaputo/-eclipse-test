@@ -35,18 +35,14 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
 
   const sortedCurrenciesList = ref<string[]>(currenciesList.value);
   const filterCurrenciesList = (input: string): void => {
-    if (input.length > 0) {
-      let searchResult: CurrencyObject[];
-      searchResult = currenciesDetails.value.filter(
-        (item) =>
-          item.CharCode.includes(input.toUpperCase()) ||
-          item.Name.toLowerCase().includes(input.toLowerCase()),
-      );
+    let searchResult: CurrencyObject[];
+    searchResult = currenciesDetails.value.filter(
+      (item) =>
+        item.CharCode.includes(input.toUpperCase()) ||
+        item.Name.toLowerCase().includes(input.toLowerCase()),
+    );
 
-      sortedCurrenciesList.value = searchResult.map((item) => item.CharCode);
-    } else {
-      sortedCurrenciesList.value = currenciesList.value;
-    }
+    sortedCurrenciesList.value = searchResult.map((item) => item.CharCode);
   };
 
   onMounted(() => {

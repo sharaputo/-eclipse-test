@@ -8,7 +8,6 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
   const isLoading = ref(false);
   const currenciesList = ref<string[]>([]);
   const currenciesDetails = ref<CurrencyObject[]>([]);
-
   const getCurrencies = (): void => {
     isLoading.value = true;
     const API = new useFetch('https://www.cbr-xml-daily.ru');
@@ -81,9 +80,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
         item.Name.toLowerCase().includes(input.toLowerCase()),
     );
 
-    filteredCurrenciesList.value = searchResult
-      .map((item) => item.CharCode)
-      .sort();
+    filteredCurrenciesList.value = searchResult.map((item) => item.CharCode);
   };
 
   onMounted(() => {

@@ -46,7 +46,7 @@
     <ul class="currency-list" v-else>
       <li
         class="currency-list__item"
-        v-for="(currency, i) in filteredCurrenciesList"
+        v-for="(currency, i) in sortedList"
         :key="`currency-${i}`">
         <input
           type="radio"
@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { storeToRefs } from 'pinia';
   import TheGrid from '@/components/layout/TheGrid.vue';
   import AppLoader from '@/components/common/AppLoader.vue';
@@ -92,6 +92,11 @@
   const showDetails = (option: string): void => {
     store.getCurrencyDetails(option);
   };
+
+  const sortedList = computed(() => {
+    let list = filteredCurrenciesList.value;
+    return list.sort();
+  });
 </script>
 
 <style lang="less" scoped>

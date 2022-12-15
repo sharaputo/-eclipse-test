@@ -126,6 +126,35 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 10px;
+
+    label {
+      color: var(--title);
+    }
+  }
+  .currency-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    .details {
+      color: var(--title);
+      transition: color @transition;
+      &__difference {
+        padding: 0 4px;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+      &__difference--growing {
+        background-color: var(--pastel-green);
+      }
+      &__difference--falling {
+        background-color: var(--burnt-sienna);
+      }
+    }
+    .reverse {
+      font-size: 2rem;
+      margin-left: 10px;
+    }
   }
   .currency-list {
     display: grid;
@@ -158,31 +187,6 @@
     input:checked + label {
       color: var(--white);
       background-color: var(--cornflower-blue);
-    }
-  }
-  .currency-details {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-    .details {
-      color: var(--currency-select);
-      transition: color @transition;
-      &__difference {
-        padding: 0 4px;
-        border-radius: 5px;
-        margin-left: 10px;
-      }
-      &__difference--growing {
-        background-color: var(--pastel-green);
-      }
-      &__difference--falling {
-        background-color: var(--burnt-sienna);
-      }
-    }
-    .reverse {
-      font-size: 2rem;
-      margin-left: 10px;
     }
   }
 </style>

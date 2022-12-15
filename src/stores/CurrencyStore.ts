@@ -6,6 +6,8 @@ import type CurrencyObject from '@/@types/CurrencyObject';
 
 export const useCurrencyStore = defineStore('currencyStore', () => {
   const isLoading = ref(false);
+  const loadingError = ref('');
+
   const currenciesList = ref<string[]>([]);
   const currenciesDetails = ref<CurrencyObject[]>([]);
   const getCurrencies = (): void => {
@@ -21,12 +23,14 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
             currenciesList.value.push(key);
             currenciesDetails.value.push(value);
           });
-
-          isLoading.value = false;
         }
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        loadingError.value =
+          'Что-то пошло не так, не удалось загрузить данные. Пожалуйста, обновите страницу.';
+      })
+      .finally(() => {
+        isLoading.value = false;
       });
   };
 
@@ -89,6 +93,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
 
   return {
     isLoading,
+    loadingError,
     filteredCurrenciesList,
     currencyDetails,
     charcode,

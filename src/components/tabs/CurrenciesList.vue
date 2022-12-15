@@ -43,6 +43,10 @@
 
     <AppLoader v-if="isLoading" />
 
+    <p class="currency-error" v-else-if="!isLoading && loadingError">
+      {{ loadingError }}
+    </p>
+
     <ul class="currency-list" v-else>
       <li
         class="currency-list__item"
@@ -71,6 +75,7 @@
   const store = useCurrencyStore();
   const {
     isLoading,
+    loadingError,
     filteredCurrenciesList,
     currencyDetails,
     charcode,
@@ -135,6 +140,9 @@
       font-size: 2rem;
       margin-left: 10px;
     }
+  }
+  .currency-error {
+    margin-top: 30px;
   }
   .currency-list {
     display: grid;

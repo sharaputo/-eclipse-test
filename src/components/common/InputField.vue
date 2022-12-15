@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-  type InputType = 'email' | 'password' | 'search' | 'tel' | 'text';
+  type InputType = 'email' | 'number' | 'password' | 'search' | 'tel' | 'text';
 
   interface inputProps {
     type: InputType;

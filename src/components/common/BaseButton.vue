@@ -1,26 +1,38 @@
 <template>
-  <button :type="type" :class="classes" @click="$emit('click')">
+  <button
+    class="button"
+    :type="type"
+    :class="activeClass"
+    @click="$emit('click')">
     <slot />
   </button>
 </template>
 
 <script setup lang="ts">
+  import { computed } from 'vue';
+
   interface BaseButtonProps {
     type?: 'button' | 'submit';
-    classes?: 'active' | 'disabled';
+    active?: boolean;
   }
 
-  withDefaults(defineProps<BaseButtonProps>(), {
+  const props = withDefaults(defineProps<BaseButtonProps>(), {
     type: 'button',
   });
 
   defineEmits<{
     (e: 'click'): void;
   }>();
+
+  const activeClass = computed(() => {
+    return props.active ? 'active' : '';
+  });
 </script>
 
 <style lang="less" scoped>
-  button {
+  .button {
+    --button-primary: var(--ronchi);
+
     display: block;
     font-size: 1.4rem;
     font-weight: 700;
@@ -29,14 +41,12 @@
     background-color: var(--button-primary);
     padding: 10px;
     border-radius: 5px;
-    transition: background-color @transition;
-  }
-  button.active {
-    background-color: var(--cornflower-blue);
-  }
-  button.disabled {
-    background-color: var(--gallery);
-    pointer-events: none;
+    transition: color @transition, background-color @transition;
+    user-select: none;
+    &.active {
+      color: var(--white);
+      background-color: var(--cornflower-blue);
+    }
   }
 
   @media @md {

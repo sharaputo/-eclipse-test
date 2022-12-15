@@ -1,16 +1,29 @@
 <template>
   <TheHeader />
   <main class="main">
-    <div class="container">
-      <div class="tabs">
+    <div class="tabs">
+      <div class="container tabs__container">
         <div class="tabs__buttons">
-          <BaseButton @click="setTab('currencies')">Список валют</BaseButton>
-          <BaseButton @click="setTab('converter')">Конвертер</BaseButton>
+          <BaseButton
+            :active="tab === 'currencies'"
+            @click="setTab('currencies')">
+            Список валют
+          </BaseButton>
+          <BaseButton
+            :active="tab === 'converter'"
+            @click="setTab('converter')">
+            Конвертер
+          </BaseButton>
         </div>
 
         <div class="tabs__content">
-          <CurrenciesList v-show="tab === 'currencies'" />
-          <CurrenciesConverter v-show="tab === 'converter'" />
+          <Transition name="content">
+            <CurrenciesList v-show="tab === 'currencies'" />
+          </Transition>
+
+          <Transition name="content">
+            <CurrenciesConverter v-show="tab === 'converter'" />
+          </Transition>
         </div>
       </div>
     </div>
@@ -75,13 +88,33 @@
   }
 
   .tabs {
+    &__container {
+      max-width: 600px;
+    }
     &__buttons {
+      max-width: 414px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
+      margin: 0 auto;
     }
     &__content {
-      padding-top: 30px;
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+
+  .content-enter-active {
+    animation: scale @transition;
+  }
+  @keyframes scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 

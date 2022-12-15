@@ -9,18 +9,19 @@
   --ronchi-dark: #ebb75780;
   --burnt-sienna: #eb6d57;
   --cornflower-blue: #578beb;
+  --pastel-green: #57eb6d;
 
   /* semantic color variables */
   --background: var(--white);
-  --button-primary: var(--ronchi);
   --footer: var(--ronchi);
   --header: var(--ronchi);
   --text: var(--mine-shaft);
   --theme-toggle: var(--mine-shaft);
+  --title: var(--mine-shaft);
 }
 
 :root.dark-theme {
   --background: var(--mine-shaft);
-  --text-content: var(--gallery);
   --theme-toggle: var(--white);
+  --title: var(--white);
 }

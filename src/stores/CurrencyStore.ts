@@ -31,6 +31,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
       })
       .finally(() => {
         isLoading.value = false;
+        getCurrencyDetails('USD');
       });
   };
 

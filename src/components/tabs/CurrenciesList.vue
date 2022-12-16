@@ -56,6 +56,7 @@
           type="radio"
           :value="currency"
           :id="currency"
+          :checked="currency === charcode"
           name="currencies"
           @change="showDetails(currency)" />
         <label :for="currency">{{ currency }}</label>

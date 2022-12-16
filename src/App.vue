@@ -6,7 +6,10 @@
         <div class="tabs__buttons">
           <BaseButton
             :active="tab === 'currencies'"
-            @click="setTab('currencies')">
+            @click="
+              setTab('currencies');
+              setUSD();
+            ">
             Список валют
           </BaseButton>
           <BaseButton
@@ -33,6 +36,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import { useCurrencyStore } from '@/stores/CurrencyStore';
   import TheHeader from '@/components/layout/TheHeader.vue';
   import TheFooter from '@/components/layout/TheFooter.vue';
   import BaseButton from '@/components/common/BaseButton.vue';
@@ -42,6 +46,10 @@
   const tab = ref('currencies');
   const setTab = (cmp: string): void => {
     tab.value = cmp;
+  };
+  const store = useCurrencyStore();
+  const setUSD = (): void => {
+    store.getCurrencyDetails('USD');
   };
 </script>
 

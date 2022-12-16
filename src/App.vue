@@ -39,8 +39,7 @@
   import CurrenciesList from '@/components/tabs/CurrenciesList.vue';
   import CurrenciesConverter from '@/components/tabs/CurrenciesConverter.vue';
 
-  let tab = ref('currencies');
-
+  const tab = ref('currencies');
   const setTab = (cmp: string): void => {
     tab.value = cmp;
   };

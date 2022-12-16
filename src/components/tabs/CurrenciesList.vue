@@ -85,7 +85,7 @@
     rateDifferenceReversed,
   } = storeToRefs(store);
 
-  const searchCurrency = (e: { target: { value: string } }) => {
+  const searchCurrency = (e: { target: { value: string } }): void => {
     store.filterCurrenciesList(e.target.value);
   };
 

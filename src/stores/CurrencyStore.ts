@@ -80,8 +80,8 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
 
     searchResult = currenciesDetails.value.filter(
       (item) =>
-        item.CharCode.includes(input.toUpperCase()) ||
-        item.Name.toLowerCase().includes(input.toLowerCase()),
+        item.CharCode.includes(input.trim().toUpperCase()) ||
+        item.Name.toLowerCase().includes(input.trim().toLowerCase()),
     );
 
     filteredCurrenciesList.value = searchResult.map((item) => item.CharCode);

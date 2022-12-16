@@ -31,14 +31,12 @@
 
 <style lang="less" scoped>
   .button {
-    --button-primary: var(--ronchi);
-
     display: block;
     font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
-    color: var(--text);
-    background-color: var(--button-primary);
+    color: var(--mine-shaft);
+    background-color: var(--ronchi);
     padding: 10px;
     border-radius: 5px;
     transition: color @transition, background-color @transition;

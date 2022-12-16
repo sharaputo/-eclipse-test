@@ -13,15 +13,11 @@
 
   /* semantic color variables */
   --background: var(--white);
-  --footer: var(--ronchi);
-  --header: var(--ronchi);
+  --content-text: var(--mine-shaft);
   --text: var(--mine-shaft);
-  --theme-toggle: var(--mine-shaft);
-  --title: var(--mine-shaft);
 }
 
 :root.dark-theme {
   --background: var(--mine-shaft);
-  --theme-toggle: var(--white);
-  --title: var(--white);
+  --content-text: var(--white);
 }

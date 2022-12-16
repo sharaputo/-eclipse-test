@@ -16,7 +16,7 @@
       font-size: 2.2rem;
       text-align: center;
       text-transform: uppercase;
-      color: var(--title);
+      color: var(--content-text);
       transition: color @transition;
     }
     &__body {

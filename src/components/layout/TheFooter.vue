@@ -20,7 +20,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--footer);
+    background-color: var(--ronchi);
     padding: 10px 0;
     &__body {
       display: grid;

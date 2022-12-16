@@ -62,7 +62,7 @@
     color: var(--text);
     background-color: var(--background);
     text-rendering: optimizeLegibility;
-    transition: color @transition, background-color @transition;
+    transition: background-color @transition;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

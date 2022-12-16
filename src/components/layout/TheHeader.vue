@@ -18,7 +18,7 @@
 
 <style lang="less" scoped>
   .header {
-    background-color: var(--header);
+    background-color: var(--ronchi);
     z-index: 100;
     &__body {
       display: grid;

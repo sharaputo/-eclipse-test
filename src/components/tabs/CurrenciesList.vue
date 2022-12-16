@@ -113,7 +113,7 @@
     gap: 10px;
 
     label {
-      color: var(--title);
+      color: var(--content-text);
     }
   }
   .currency-details {
@@ -122,7 +122,7 @@
     justify-content: center;
     margin-top: 30px;
     .details {
-      color: var(--title);
+      color: var(--content-text);
       transition: color @transition;
       &__difference {
         padding: 0 4px;
@@ -157,7 +157,7 @@
       font-size: 1.4rem;
       font-weight: 700;
       text-align: center;
-      color: var(--text);
+      color: var(--mine-shaft);
       background-color: var(--ronchi);
       padding: 10px;
       border-radius: 5px;

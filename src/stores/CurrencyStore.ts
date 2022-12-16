@@ -41,6 +41,7 @@ export const useCurrencyStore = defineStore('currencyStore', () => {
       (item) => item.CharCode === option,
     );
   };
+
   const charcode = computed(() => {
     return currencyDetails.value?.CharCode;
   });

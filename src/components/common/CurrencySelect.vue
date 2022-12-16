@@ -93,14 +93,13 @@
       }
     }
     &__list {
-      width: 100%;
+      width: 100px;
       height: 200px;
       position: absolute;
       top: 30px;
-      left: -50%;
+      left: calc(50% - 50px);
       text-align: center;
       background-color: var(--background);
-      transform: translateX(50%);
       overflow: auto;
       z-index: 10;
     }

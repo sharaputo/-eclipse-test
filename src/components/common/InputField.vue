@@ -18,6 +18,7 @@
 
 <style lang="less" scoped>
   .input {
+    --background: var(--gallery);
     --border: var(--mine-shaft);
     --placeholder: var(--mine-shaft-hover);
     --text: var(--mine-shaft);
@@ -32,8 +33,13 @@
     &::placeholder {
       color: var(--placeholder);
     }
+    &[readonly] {
+      background-color: var(--background);
+      pointer-events: none;
+    }
   }
   .dark-theme .input {
+    --background: var(--mine-shaft-hover);
     --border: var(--white);
     --placeholder: var(--gallery);
     --text: var(--white);

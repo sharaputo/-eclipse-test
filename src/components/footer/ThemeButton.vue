@@ -66,6 +66,8 @@
 
 <style lang="less" scoped>
   .theme-toggle {
+    --background: var(--white);
+    --toggle: var(--mine-shaft);
     &__checkbox {
       position: absolute;
       top: 0;
@@ -93,7 +95,7 @@
       left: 6px;
       width: 22px;
       height: 22px;
-      background-color: var(--theme-toggle);
+      background-color: var(--toggle);
       border-radius: 50%;
       transform: translateX(0);
       transition: background-color @transition, transform @transition;
@@ -101,5 +103,9 @@
         transform: translateX(32px);
       }
     }
+  }
+  .dark-theme .theme-toggle {
+    --background: var(--mine-shaft);
+    --toggle: var(--white);
   }
 </style>

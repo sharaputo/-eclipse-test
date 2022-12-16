@@ -1,5 +1,13 @@
 <template>
-  <input class="input" :type="type" :id="id" :placeholder="placeholder" />
+  <input
+    class="input"
+    :type="type"
+    :id="id"
+    :placeholder="placeholder"
+    :value="modelValue"
+    @input="
+      $emit('update:modelValue', ($event.target as HTMLInputElement).value)
+    " />
 </template>
 
 <script setup lang="ts">
@@ -7,6 +15,7 @@
 
   interface inputProps {
     type: InputType;
+    modelValue?: string | number;
     id?: string;
     placeholder?: string;
   }
@@ -14,6 +23,7 @@
   withDefaults(defineProps<inputProps>(), {
     type: 'text',
   });
+  defineEmits(['update:modelValue']);
 </script>
 
 <style lang="less" scoped>
